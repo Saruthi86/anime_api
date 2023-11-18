@@ -2,13 +2,13 @@ import { Controller, Get } from '@nestjs/common';
 import { AnimeService } from './anime.service';
 import { Anime } from './interfaces/anime.interface';
 
-@Controller("Anime")
+@Controller("anime")
 export class AnimeController {
-  constructor(private readonly AnimeService: AnimeService) {}
+  constructor(private readonly animeService: AnimeService) {}
 
   @Get()
   async findAll(): Promise<Anime[]>{
-    return this.AnimeService.findAll();
+    return this.animeService.findAll();
   
   }
 }

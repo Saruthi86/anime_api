@@ -13,19 +13,19 @@
 use('animeDB');
 
 // Insert a few documents into the sales collection.
-db.getCollection('anime').insertMany([
-  { 'item': 'abc', 'price': 10, 'quantity': 2, 'date': new Date('2014-03-01T08:00:00Z') },
-  { 'item': 'jkl', 'price': 20, 'quantity': 1, 'date': new Date('2014-03-01T09:00:00Z') },
-  { 'item': 'xyz', 'price': 5, 'quantity': 10, 'date': new Date('2014-03-15T09:00:00Z') },
-  { 'item': 'xyz', 'price': 5, 'quantity': 20, 'date': new Date('2014-04-04T11:21:39.736Z') },
-  { 'item': 'abc', 'price': 10, 'quantity': 10, 'date': new Date('2014-04-04T21:23:13.331Z') },
-  { 'item': 'def', 'price': 7.5, 'quantity': 5, 'date': new Date('2015-06-04T05:08:13Z') },
-  { 'item': 'def', 'price': 7.5, 'quantity': 10, 'date': new Date('2015-09-10T08:43:00Z') },
-  { 'item': 'abc', 'price': 10, 'quantity': 5, 'date': new Date('2016-02-06T20:20:13Z') },
+db.getCollection('animes').insertMany([
+  { 'anime_id':1 , 'name': "Kimi no Na wa", 'genre': "Drama", 'rating':9.37 },
+  { 'anime_id':2 , 'name': "Fullmetal Alchemist: Brotherhood", 'genre': "Action", 'rating':9.26 },
+  { 'anime_id':3 , 'name': "Gintama", 'genre': "Action", 'rating':9.25 },
+  { 'anime_id':4 , 'name': "Steins Gate", 'genre': "Sci-Fi", 'rating':9.17 },
+  { 'anime_id':5 , 'name': "Haikyuu!!", 'genre': "Sports", 'rating':9.15 },
+  { 'anime_id':6 , 'name': "Hunter x Hunter (2011)", 'genre': "Action", 'rating':9.13 },
 ]);
 
+//db.animes.drop();
+
 // Run a find command to view items sold on April 4th, 2014.
-const salesOnApril4th = db.getCollection('anime').find({
+const salesOnApril4th = db.getCollection('animes').find({
   date: { $gte: new Date('2014-04-04'), $lt: new Date('2014-04-05') }
 }).count();
 
@@ -35,7 +35,7 @@ console.log(`${salesOnApril4th} sales occurred in 2014.`);
 // Here we run an aggregation and open a cursor to the results.
 // Use '.toArray()' to exhaust the cursor to return the whole result set.
 // You can use '.hasNext()/.next()' to iterate through the cursor page by page.
-db.getCollection('anime').aggregate([
+db.getCollection('animes').aggregate([
   // Find all of the sales that occurred in 2014.
   { $match: { date: { $gte: new Date('2014-01-01'), $lt: new Date('2015-01-01') } } },
   // Group the total sales for each product.
